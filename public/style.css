@@ -2147,3 +2147,37 @@ select {
     width: 100%;
   }
 }
+
+/* --- Профіль артефакту --- */
+.artifact-profile .artifact-header {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.artifact-profile .artifact-photo {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  aspect-ratio: 480 / 340;
+}
+
+.artifact-profile .profile-meta .badge {
+  display: flex;
+  width: max-content;
+  margin-bottom: 8px;
+}
+
+.artifact-related {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.artifact-note h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.artifact-note h3 a:hover {
+  text-decoration: underline;
+}

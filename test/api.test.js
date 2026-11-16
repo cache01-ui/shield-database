@@ -123,3 +123,16 @@ test('Фото: запасна ілюстрація артефакту замі�
   const { data } = await call('GET', '/api/threats/kang');
   assert.ok(['kang.svg', 'photos/kang.png', 'photos/kang.jpg', 'photos/kang.jpeg', 'photos/kang.webp'].includes(data.image));
 });
+
+test('Артефакти: каталог, пошук і профіль із пов’язаними записами', async () => {
+  const all = await call('GET', '/api/artifacts');
+  assert.equal(all.status, 200);
+  assert.equal(all.data.items.length, 8);
+  const found = await call('GET', '/api/artifacts?q=' + encodeURIComponent('молот'));
+  assert.ok(found.data.items.some(a => a.id === 'mjolnir'));
+  const one = await call('GET', '/api/artifacts/tesseract');
+  assert.equal(one.status, 200);
+  assert.ok(one.data.incidents.some(x => x.id === 'newyork-2012'));
+  assert.ok(one.data.dossiers.length > 0);
+  assert.equal((await call('GET', '/api/artifacts/nothing')).status, 404);
+});

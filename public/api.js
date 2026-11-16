@@ -50,6 +50,8 @@ const api = {
   incidents: (status = 'all', sort = 'newest') => apiRequest(`/incidents?status=${encodeURIComponent(status)}&sort=${encodeURIComponent(sort)}`),
   incident: id => apiRequest(`/incidents/${encodeURIComponent(id)}`),
   dossier: id => apiRequest(`/dossiers/${encodeURIComponent(id)}`),
+  artifacts: (q = '', signal) => apiRequest(`/artifacts${q ? `?q=${encodeURIComponent(q)}` : ''}`, { signal }),
+  artifact: id => apiRequest(`/artifacts/${encodeURIComponent(id)}`),
   reports: (params = {}, signal) => apiRequest(`/reports?${new URLSearchParams(params)}`, { signal }),
   createReport: data => apiRequest('/reports', { method: 'POST', body: data }),
   updateReport: (id, data) => apiRequest(`/reports/${id}`, { method: 'PUT', body: data }),

@@ -111,7 +111,7 @@ if (incidentProfile) {
   const factionHtml = item.factions.map(f => `<section class="faction-card ${f.tone}"><h2>${safeText(f.title)}</h2><p>${safeText(f.summary)}</p><ul>${f.points.map(p => `<li>${safeText(p)}</li>`).join('')}</ul><p class="faction-result">${safeText(f.result)}</p></section>`).join('');
   const links = item.links.map(l => `<a class="related-link ${l.kind}" href="${safeText(l.href)}">[ ${safeText(l.label)} ]</a>`).join('');
   const artifacts = item.artifacts.length
-    ? `<section class="artifact-notes"><h2>ПОВ’ЯЗАНІ АРТЕФАКТИ</h2>${item.artifacts.map(a => `<article class="artifact-note" id="artifact-${safeText(a.id)}"><h3>${safeText(a.title)}</h3><p>${safeText(a.text)}</p></article>`).join('')}</section>`
+    ? `<section class="artifact-notes"><h2>ПОВ’ЯЗАНІ АРТЕФАКТИ</h2>${item.artifacts.map(a => `<article class="artifact-note" id="artifact-${safeText(a.id)}"><h3><a href="artifact_profile.html?id=${encodeURIComponent(a.id)}">${safeText(a.title)} →</a></h3><p>${safeText(a.text)}</p></article>`).join('')}</section>`
     : '';
   const related = links || artifacts
     ? `<section class="related-section"><h2>ПОВ’ЯЗАНІ ДОСЬЄ / МАТРИЦІ / АРТЕФАКТИ</h2><div class="related-links">${links}</div>${artifacts}</section>`

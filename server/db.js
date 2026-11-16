@@ -48,6 +48,26 @@ CREATE TABLE IF NOT EXISTS incidents (
   artifacts   TEXT NOT NULL DEFAULT '[]'    -- JSON-масив артефактів
 );
 
+CREATE TABLE IF NOT EXISTS artifacts (
+  id          TEXT PRIMARY KEY,
+  position    INTEGER NOT NULL,
+  code        TEXT NOT NULL,
+  name        TEXT NOT NULL,
+  type        TEXT NOT NULL,
+  status      TEXT NOT NULL,
+  badge       TEXT NOT NULL,
+  fallback    TEXT NOT NULL,                -- запасна SVG-ілюстрація
+  origin      TEXT NOT NULL,
+  location    TEXT NOT NULL,
+  keywords    TEXT NOT NULL,
+  summary     TEXT NOT NULL,
+  history     TEXT NOT NULL,
+  properties  TEXT NOT NULL,
+  conclusion  TEXT NOT NULL,
+  incidents   TEXT NOT NULL DEFAULT '[]',   -- JSON-масив id інцидентів
+  dossiers    TEXT NOT NULL DEFAULT '[]'    -- JSON-масив id досьє
+);
+
 CREATE TABLE IF NOT EXISTS reports (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,
   title       TEXT NOT NULL CHECK (length(title) BETWEEN 5 AND 120),
@@ -96,6 +116,15 @@ function seed(db) {
         insert.run(x.id, x.code, x.date, x.sort, x.title, x.location, x.severity, x.status, x.description,
           x.story, x.conclusion, x.image || '', JSON.stringify(x.factions), JSON.stringify(x.links), JSON.stringify(x.artifacts));
       }
+    }
+
+    if (count('artifacts') === 0) {
+      const insert = db.prepare(`INSERT INTO artifacts
+        (id, position, code, name, type, status, badge, fallback, origin, location, keywords, summary, history, properties, conclusion, incidents, dossiers)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+      readJson('artifacts.json').forEach((a, i) => insert.run(
+        a.id, i + 1, a.code, a.name, a.type, a.status, a.badge, a.fallback, a.origin, a.location, a.keywords,
+        a.summary, a.history, a.properties, a.conclusion, JSON.stringify(a.incidents), JSON.stringify(a.dossiers)));
     }
 
     if (count('reports') === 0) {

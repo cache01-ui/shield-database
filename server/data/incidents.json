@@ -232,7 +232,7 @@
       {
         "label": "АРТЕФАКТ: КАМЕНІ НЕСКІНЧЕННОСТІ",
         "kind": "artifact",
-        "href": "#artifact-infinity-stones"
+        "href": "artifact_profile.html?id=infinity-stones"
       }
     ],
     "artifacts": [
@@ -647,7 +647,7 @@
       {
         "label": "АРТЕФАКТ: ТЕССЕРАКТ",
         "kind": "artifact",
-        "href": "#artifact-tesseract"
+        "href": "artifact_profile.html?id=tesseract"
       }
     ],
     "artifacts": [

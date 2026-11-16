@@ -24,6 +24,10 @@ function createApiRouter(db, photos) {
                               FROM incidents`),
     incidentById: db.prepare('SELECT * FROM incidents WHERE id = ?'),
     incidentExists: db.prepare('SELECT 1 FROM incidents WHERE id = ?'),
+    artifactList: db.prepare(`SELECT id, code, name, type, status, badge, fallback, keywords, summary, incidents
+                              FROM artifacts ORDER BY position`),
+    artifactById: db.prepare('SELECT * FROM artifacts WHERE id = ?'),
+    incidentBrief: db.prepare('SELECT id, code, title FROM incidents WHERE id = ?'),
     reportById: db.prepare(`SELECT r.id, r.title, r.agent, r.location, r.priority, r.status, r.incident_id AS incidentId,
                               i.code AS incidentCode, r.body, r.created_at AS createdAt, r.updated_at AS updatedAt
                             FROM reports r LEFT JOIN incidents i ON i.id = r.incident_id WHERE r.id = ?`),
@@ -33,7 +37,8 @@ function createApiRouter(db, photos) {
                               incident_id = ?, body = ?, updated_at = strftime('%Y-%m-%dT%H:%M:%SZ', 'now') WHERE id = ?`),
     reportDelete: db.prepare('DELETE FROM reports WHERE id = ?'),
     counts: db.prepare(`SELECT (SELECT COUNT(*) FROM dossiers) AS dossiers, (SELECT COUNT(*) FROM threats) AS threats,
-                               (SELECT COUNT(*) FROM incidents) AS incidents, (SELECT COUNT(*) FROM reports) AS reports`),
+                               (SELECT COUNT(*) FROM incidents) AS incidents, (SELECT COUNT(*) FROM artifacts) AS artifacts,
+                               (SELECT COUNT(*) FROM reports) AS reports`),
   };
   const incidentExists = id => Boolean(sql.incidentExists.get(id));
 
@@ -93,6 +98,30 @@ function createApiRouter(db, photos) {
     const row = sql.incidentById.get(id);
     if (!row) return notFound(res, 'Інцидент');
     res.json({ ...withPhoto(row), factions: parseJson(row.factions), links: parseJson(row.links), artifacts: parseJson(row.artifacts) });
+  }));
+
+  /* ---------- Артефакти (лише читання, пошук ?q=) ---------- */
+  const artifactImage = row => photos.findPhoto(row.id) || row.fallback;
+  router.get('/artifacts', handle((req, res) => {
+    const q = clean(req.query.q).toLocaleLowerCase('uk').slice(0, 80);
+    let rows = sql.artifactList.all().map(row => {
+      const incidents = parseJson(row.incidents);
+      const first = incidents.length ? sql.incidentBrief.get(incidents[0]) : null;
+      return { id: row.id, code: row.code, name: row.name, type: row.type, status: row.status, badge: row.badge,
+        summary: row.summary, keywords: row.keywords, image: artifactImage(row), incidentCode: first ? first.code : null };
+    });
+    if (q) rows = rows.filter(a => `${a.name} ${a.type} ${a.summary} ${a.keywords}`.toLocaleLowerCase('uk').includes(q));
+    res.json({ total: sql.counts.get().artifacts, items: rows.map(({ keywords, ...rest }) => rest) });
+  }));
+  router.get('/artifacts/:id', handle((req, res) => {
+    const id = slugParam(req, res); if (!id) return;
+    const row = sql.artifactById.get(id);
+    if (!row) return notFound(res, 'Артефакт');
+    const incidents = parseJson(row.incidents).map(x => sql.incidentBrief.get(x)).filter(Boolean);
+    const dossiers = parseJson(row.dossiers).map(x => sql.dossierById.get(x)).filter(Boolean)
+      .map(d => ({ id: d.id, title: d.title.replace(/^S\.H\.I\.E\.L\.D\. — ДОСЬЄ: /, '') }));
+    const { fallback, keywords, position, ...rest } = row;
+    res.json({ ...rest, image: artifactImage(row), incidents, dossiers });
   }));
 
   /* ---------- Рапорти: повний CRUD ---------- */
