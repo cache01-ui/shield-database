@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S.H.I.E.L.D. — Журнал інцидентів</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo1.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="terminal-container">
+
+    <header class="top-nav">
+      <p class="system-title">S.H.I.E.L.D. // БАЗА ДАНИХ [РІВЕНЬ ДОСТУПУ 7]</p>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">☰ МЕНЮ</button>
+      <nav class="tabs-group" id="main-nav" aria-label="Розділи бази даних">
+        <a href="dossier.html" class="tab-link">ДОСЬЄ</a>
+        <a href="threats.html" class="tab-link">МАТРИЦЯ ЗАГРОЗ</a>
+        <a href="incidents.html" class="tab-link active" aria-current="page">ІНЦИДЕНТИ</a>
+        <a href="artifacts.html" class="tab-link">АРТЕФАКТИ</a>
+        <a href="reports.html" class="tab-link">РАПОРТИ</a>
+      </nav>
+    </header>
+
+    <div class="filter-bar">
+      <span>[</span>
+      <label for="incident-filter">ФІЛЬТР:</label>
+      <select id="incident-filter">
+        <option value="all">УСІ ІНЦИДЕНТИ</option>
+        <option value="closed">ЗАКРИТІ</option>
+        <option value="open">ВІДКРИТІ</option>
+        <option value="restricted">ДОСТУП ОБМЕЖЕНО</option>
+      </select>
+      <span>//</span>
+      <label for="incident-sort">СОРТУВАННЯ:</label>
+      <select id="incident-sort">
+        <option value="newest">ХРОНОЛОГІЧНЕ</option>
+        <option value="oldest">ЗА ЗРОСТАННЯМ ДАТИ</option>
+      </select>
+      <span>]</span>
+      <p class="result-count" id="incident-count" aria-live="polite"></p>
+    </div>
+
+    <h1 class="visually-hidden">Журнал інцидентів</h1>
+    <main class="incident-list" id="incident-list"></main>
+
+    <footer class="page-footer">
+      <a href="index.html" class="logout-btn">ЗАВЕРШИТИ СЕСІЮ // ВИХІД</a>
+    </footer>
+
+  </div>
+  <script src="ui.js"></script>
+  <script src="api.js"></script>
+  <script src="incidents.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340">
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#18212b"/><stop offset="1" stop-color="#06090e"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#38bdf8" stop-opacity=".5"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#38bdf8" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="480" height="340" fill="url(#bg)"/><rect width="480" height="340" fill="url(#grid)"/>
+<circle cx="240" cy="150" r="175" fill="url(#glow)"/>
+
+<circle cx="240" cy="150" r="104" fill="#0e2233" stroke="#7dd3fc" stroke-width="3"/>
+<g fill="none" stroke="#7dd3fc" stroke-opacity=".75" stroke-width="3" stroke-linecap="round">
+<path d="M164 120q30-26 52 0t50-4 42 18"/><path d="M150 156q34-18 60 4t56-6 60 10"/><path d="M162 194q30-14 50 4t48-2 42 10"/>
+<path d="M240 48v24M240 228v24M138 150h-20M362 150h-20"/></g>
+<circle cx="240" cy="150" r="30" fill="#e0f2fe" fill-opacity=".9"/><circle cx="240" cy="150" r="54" fill="none" stroke="#e0f2fe" stroke-opacity=".35" stroke-width="10"/>
+<ellipse cx="240" cy="150" rx="178" ry="34" fill="none" stroke="#38bdf8" stroke-opacity=".45" stroke-width="2" transform="rotate(-14 240 150)"/>
+<circle cx="70" cy="74" r="3" fill="#e0f2fe"/><circle cx="418" cy="96" r="2" fill="#e0f2fe"/><circle cx="400" cy="250" r="3" fill="#e0f2fe"/><circle cx="84" cy="244" r="2" fill="#e0f2fe"/>
+<path d="M16 16h28M16 16v28M464 16h-28M464 16v28M16 324h28M16 324v-28M464 324h-28M464 324v-28" stroke="#38bdf8" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<text x="240" y="318" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="6" fill="#38bdf8" fill-opacity=".9">LIVING PLANET</text>
+</svg>

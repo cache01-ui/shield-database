@@ -1,0 +1,22 @@
+{
+  "name": "shield-database",
+  "version": "1.0.0",
+  "description": "S.H.I.E.L.D. — база даних оперативника: клієнт, REST API на Express і база даних SQLite",
+  "main": "server/index.js",
+  "type": "commonjs",
+  "private": true,
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "dev": "node --env-file-if-exists=.env --watch server/index.js",
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "compression": "^1.8.2",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.4",
+    "helmet": "^8.3.0"
+  }
+}

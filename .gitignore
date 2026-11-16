@@ -1,0 +1,19 @@
+# Залежності та локальні дані
+node_modules/
+/data/
+*.db
+*.db-wal
+*.db-shm
+
+# Секрети та налаштування середовища
+.env
+.env.*
+!.env.example
+
+# Службові файли
+.claude/
+*.docx
+*.zip
+*.log
+.DS_Store
+Thumbs.db

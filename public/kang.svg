@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340">
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#18212b"/><stop offset="1" stop-color="#06090e"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#22c55e" stop-opacity=".5"/><stop offset="1" stop-color="#22c55e" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#22c55e" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="480" height="340" fill="url(#bg)"/><rect width="480" height="340" fill="url(#grid)"/>
+<circle cx="240" cy="150" r="175" fill="url(#glow)"/>
+
+<path d="M112 340c8-80 50-120 128-126 78 6 120 46 128 126" fill="#0f1a14" stroke="#22c55e" stroke-opacity=".7" stroke-width="3"/>
+<path d="M160 142c0-66 34-104 80-104s80 38 80 104c0 48-34 82-80 82s-80-34-80-82z" fill="#14532d" stroke="#4ade80" stroke-width="3"/>
+<path d="M190 138c0-36 20-58 50-58s50 22 50 58c0 30-22 54-50 54s-50-24-50-54z" fill="#1e3a8a"/>
+<path d="M208 132h22m20 0h22" stroke="#bfdbfe" stroke-width="5" stroke-linecap="round"/>
+<path d="M150 112l-24-30 40 12M330 112l24-30-40 12" fill="#4ade80"/>
+<path d="M240 38v-14" stroke="#4ade80" stroke-width="4"/><circle cx="240" cy="20" r="6" fill="#a7f3d0"/>
+<g fill="none" stroke="#22c55e" stroke-opacity=".45" stroke-width="2"><circle cx="240" cy="150" r="140"/><path d="M240 10v20M240 270v20M100 150h20M360 150h20"/></g>
+<path d="M16 16h28M16 16v28M464 16h-28M464 16v28M16 324h28M16 324v-28M464 324h-28M464 324v-28" stroke="#22c55e" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<text x="240" y="318" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="6" fill="#22c55e" fill-opacity=".9">CONQUEROR // TIME</text>
+</svg>

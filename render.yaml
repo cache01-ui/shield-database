@@ -1,0 +1,17 @@
+# Конфігурація розгортання на Render (Blueprint): https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: shield-database
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "24"
+      - key: WRITE_LIMIT_PER_15_MIN
+        value: "60"

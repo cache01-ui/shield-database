@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S.H.I.E.L.D. — Термінал авторизації</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo1.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="terminal-container login-terminal">
+
+    <header class="login-header">
+      <p class="system-title">S.H.I.E.L.D. // БАЗА ДАНИХ [РІВЕНЬ ДОСТУПУ 7]</p>
+      <a href="index.html"><img src="logo1.png" alt="S.H.I.E.L.D. — на головну" class="login-logo" width="120" height="120"></a>
+    </header>
+
+    <main class="login-main">
+      <div class="login-title-block">
+        <h1 class="login-title">S.H.I.E.L.D. SECURE ARCHIVE</h1>
+        <p class="login-subtitle">ТЕРМІНАЛ АВТОРИЗАЦІЇ ОПЕРАТИВНИКА</p>
+      </div>
+
+      <p class="restricted-badge">ОБМЕЖЕНИЙ ДОСТУП // РІВЕНЬ 7+</p>
+
+      <form class="auth-form" id="auth-form" action="dossier.html" method="get" novalidate>
+        <div class="form-field">
+          <label for="agent-id" class="field-label-text">ІДЕНТИФІКАТОР АГЕНТА</label>
+          <input type="text" id="agent-id" class="terminal-input" placeholder="LVL7-COULSON" autocomplete="off" spellcheck="false" aria-describedby="agent-id-hint agent-id-error">
+          <p class="field-hint" id="agent-id-hint">Формат: ПРЕФІКС-ПРІЗВИЩЕ латиницею, напр. LVL7-COULSON</p>
+          <p class="field-error" id="agent-id-error" aria-live="polite"></p>
+        </div>
+        <div class="form-field">
+          <label for="access-key" class="field-label-text">КЛЮЧ ДОСТУПУ</label>
+          <div class="password-wrap">
+            <input type="password" id="access-key" class="terminal-input" placeholder="••••••••" autocomplete="off" aria-describedby="access-key-hint access-key-error">
+            <button type="button" class="password-toggle" aria-controls="access-key" aria-pressed="false">ПОКАЗАТИ</button>
+          </div>
+          <p class="field-hint" id="access-key-hint">Щонайменше 8 символів: літери та цифри, без пробілів</p>
+          <p class="field-error" id="access-key-error" aria-live="polite"></p>
+        </div>
+        <button type="submit" class="submit-btn">ПІДТВЕРДИТИ ВХІД</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <footer class="login-footer">
+      <p>УВАГА: Ця система є власністю S.H.I.E.L.D. і перебуває під юрисдикцією Ради Світової Безпеки (WSC). Несанкціонований доступ, спроба дешифрування або копіювання даних карається згідно з Директивою 10-A та міжнародним трибуналом. Усі сесії фіксуються штучним інтелектом. IP та біометричні маркери передано на сервер перевірки.</p>
+      <p>СТАТУС: АВТОНОМНИЙ РЕЖИМ // ПРОТОКОЛ «ЗАХИСТ ВІД ЗЛАМУ» АКТИВОВАНО</p>
+    </footer>
+
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>

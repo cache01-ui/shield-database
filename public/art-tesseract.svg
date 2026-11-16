@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340">
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#18212b"/><stop offset="1" stop-color="#06090e"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#38bdf8" stop-opacity=".5"/><stop offset="1" stop-color="#38bdf8" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#38bdf8" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="480" height="340" fill="url(#bg)"/><rect width="480" height="340" fill="url(#grid)"/>
+<circle cx="240" cy="150" r="175" fill="url(#glow)"/>
+
+<g transform="translate(240 150)" stroke="#7dd3fc" stroke-width="3" stroke-linejoin="round">
+<path d="M0-96l84 44v96L0 88l-84-44v-96z" fill="#0c4a6e" fill-opacity=".55"/>
+<path d="M0-96v88m0 0l84-44M0-8l-84-44M0-8v96" fill="none"/>
+<path d="M0-52l44 24v48L0 44l-44-24v-48z" fill="#e0f2fe" fill-opacity=".35"/>
+</g>
+<path d="M16 16h28M16 16v28M464 16h-28M464 16v28M16 324h28M16 324v-28M464 324h-28M464 324v-28" stroke="#38bdf8" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<text x="240" y="318" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="6" fill="#38bdf8" fill-opacity=".9">SPACE STONE</text>
+</svg>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S.H.I.E.L.D. Secure Archive — Досьє</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo1.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="terminal-container">
+
+    <header class="top-nav">
+      <p class="system-title">S.H.I.E.L.D. // БАЗА ДАНИХ [РІВЕНЬ ДОСТУПУ 7]</p>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">☰ МЕНЮ</button>
+      <nav class="tabs-group" id="main-nav" aria-label="Розділи бази даних">
+        <a href="dossier.html" class="tab-link active" aria-current="page">ДОСЬЄ</a>
+        <a href="threats.html" class="tab-link">МАТРИЦЯ ЗАГРОЗ</a>
+        <a href="incidents.html" class="tab-link">ІНЦИДЕНТИ</a>
+        <a href="artifacts.html" class="tab-link">АРТЕФАКТИ</a>
+        <a href="reports.html" class="tab-link">РАПОРТИ</a>
+      </nav>
+    </header>
+
+    <div class="search-panel" role="search">
+      <label for="search-input" class="visually-hidden">Пошук оперативників</label>
+      <input type="search" id="search-input" class="search-input" data-search-cards=".agent-card" placeholder="[ ПОШУК ЗА ПРІЗВИЩЕМ / ПОЗИВНИМ / ID... ]">
+      <div class="catalog-tools">
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div class="view-toggle" role="group" aria-label="Вигляд каталогу">
+          <button type="button" class="view-btn" data-view="grid" aria-pressed="true">СІТКА</button>
+          <button type="button" class="view-btn" data-view="list" aria-pressed="false">СПИСОК</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="cards-row">
+      <h1 class="visually-hidden">Каталог оперативників</h1>
+      <article class="agent-card" data-keywords="старк тони энтони железный человек залізна людина iron man stark">
+        <a href="dossier_profile.html?id=stark" class="card-link">
+          <img src="stark.png" alt="Ентоні Старк" class="agent-photo" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-kia">ЗАГИНУВ // 2023</p>
+            <h2 class="agent-name">СТАРК, Ентоні</h2>
+            <p class="agent-desc">Позивний: Залізна Людина | Статус: Співзасновник ініціативи «Месники»</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="роджерс стив стівен капитан америка капітан captain america rogers кэп">
+        <a href="dossier_profile.html?id=rogers" class="card-link">
+          <img src="rogers.png" alt="Стівен Роджерс" class="agent-photo" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-retired">У ВІДСТАВЦІ</p>
+            <h2 class="agent-name">РОДЖЕРС, Стівен</h2>
+            <p class="agent-desc">Позивний: Капітан Америка | Статус: Оперативний статус припинено</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="паркер питер пітер человек паук людина павук spider man parker">
+        <a href="dossier_profile.html?id=parker" class="card-link">
+          <img src="parker.png" alt="Пітер Паркер" class="agent-photo" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">ПАРКЕР, Пітер</h2>
+            <p class="agent-desc">Позивний: Людина-павук | Статус: Молодший оперативник під наглядом</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="романова романофф наташа наталья вдова чорна черная black widow romanoff">
+        <a href="dossier_profile.html?id=romanoff" class="card-link">
+          <img src="romanoff.png" alt="Наташа Романова" class="agent-photo" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-kia">ЗАГИНУЛА // 2023</p>
+            <h2 class="agent-name">РОМАНОВА, Наташа</h2>
+            <p class="agent-desc">Позивний: Чорна Вдова | Статус: Оперативник вищого рівня</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="беннер баннер брюс халк hulk banner">
+        <a href="dossier_profile.html?id=banner" class="card-link">
+          <img src="banner.png" alt="Брюс Беннер" class="agent-photo" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">БЕННЕР, Брюс</h2>
+            <p class="agent-desc">Позивний: Халк | Статус: Консультант з гамма-фізики та біоінженерії</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="тор одинсон бог грома грому thor odinson асгард">
+        <a href="dossier_profile.html?id=thor" class="card-link">
+          <img src="thor.png" alt="Тор Одинсон" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-retired">ПОЗА СЕКТОРОМ</p>
+            <h2 class="agent-name">ОДИНСОН, Тор</h2>
+            <p class="agent-desc">Позивний: Бог Грому | Статус: Космічне чергування // Новий Асґард</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="бартон клинт клінтон соколиный глаз соколине око ронин ронін hawkeye barton">
+        <a href="dossier_profile.html?id=barton" class="card-link">
+          <img src="barton.png" alt="Клінтон Бартон" class="agent-photo" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-retired">У ВІДСТАВЦІ</p>
+            <h2 class="agent-name">БАРТОН, Клінтон</h2>
+            <p class="agent-desc">Позивний: Соколине Око | Статус: Оперативний статус припинено</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="стрэндж стрендж стивен стівен доктор чародей чародій маг strange mystic">
+        <a href="dossier_profile.html?id=strange" class="card-link">
+          <img src="strange.png" alt="Стівен Стрендж" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">СТРЕНДЖ, Стівен</h2>
+            <p class="agent-desc">Позивний: Майстер містичних мистецтв | Статус: Моніторинг мультивсесвіту</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="вілсон уилсон сэм сем сокол сокіл капитан америка капітан wilson falcon captain america">
+        <a href="dossier_profile.html?id=wilson" class="card-link">
+          <img src="wilson.png" alt="Семюел Вілсон" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">ВІЛСОН, Семюел</h2>
+            <p class="agent-desc">Позивний: Капітан Америка (кол. Сокіл) | Статус: Польове командування</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="барнс баки бакі зимний солдат зимовий солдат білий вовк barnes bucky winter soldier">
+        <a href="dossier_profile.html?id=barnes" class="card-link">
+          <img src="barnes.png" alt="Джеймс Барнс" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">БАРНС, Джеймс</h2>
+            <p class="agent-desc">Позивний: Зимовий Солдат // Білий Вовк | Статус: Спецоперації розвідки</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="максімова максимофф ванда алая ведьма багряна відьма maximoff wanda scarlet witch">
+        <a href="dossier_profile.html?id=maximoff" class="card-link">
+          <img src="maximoff.png" alt="Ванда Максімова" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-lost">MIA // НЕВІДОМО</p>
+            <h2 class="agent-name">МАКСІМОВА, Ванда</h2>
+            <p class="agent-desc">Позивний: Багряна Відьма | Статус: Аномалія Омега-рівня // Зникла</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="роудс роуди воитель воітель воительница бойова машина war machine rhodes rodey">
+        <a href="dossier_profile.html?id=rhodes" class="card-link">
+          <img src="rhodes.png" alt="Джеймс Роудс" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">РОУДС, Джеймс</h2>
+            <p class="agent-desc">Позивний: Бойова Машина (War Machine) | Статус: Полковник ВПС США // Зв'язок</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="говард старк howard stark засновник сср щит ssr shield">
+        <a href="dossier_profile.html?id=howard" class="card-link">
+          <img src="howard.png" alt="Говард Старк" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-lost">ЗАГИНУВ 1991</p>
+            <h2 class="agent-name">СТАРК, Говард</h2>
+            <p class="agent-desc">Позивний: Архітектор Щ.И.Т. | Статус: Співзасновник агентства</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="тчалла т чалла черная пантера чорна пантера ваканда black panther tchalla чадвик">
+        <a href="dossier_profile.html?id=tchalla" class="card-link">
+          <img src="tchalla.png" alt="Король Т'Чалла" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-lost">СПОЧИВ У МИРІ // 2024</p>
+            <h2 class="agent-name">Т'ЧАЛЛА</h2>
+            <p class="agent-desc">Позивний: Чорна Пантера | Статус: Король Ваканди // Монарх</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="валькирия валькірія брунгільда асгард новый асгард valkyrie asgard">
+        <a href="dossier_profile.html?id=valkyrie" class="card-link">
+          <img src="valkyrie.png" alt="Валькірія" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">БРУНГІЛЬДА</h2>
+            <p class="agent-desc">Позивний: Валькірія | Статус: Королева Нового Асґарду</p>
+          </div>
+        </a>
+      </article>
+      <article class="agent-card" data-keywords="ленг ленґ скотт муравей человек муравей людина мураха ant man scott lang квант">
+        <a href="dossier_profile.html?id=lang" class="card-link">
+          <img src="lang.png" alt="Скотт Ленґ" class="agent-photo photo-top" loading="lazy">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">ЛЕНҐ, Скотт</h2>
+            <p class="agent-desc">Позивний: Людина-Мураха (Ant-Man) | Статус: Квантові операції</p>
+          </div>
+        </a>
+      </article>
+      <p class="empty-state" hidden>ЗА ЗАПИТОМ НІЧОГО НЕ ЗНАЙДЕНО</p>
+    </main>
+
+    <footer class="page-footer">
+      <a href="index.html" class="logout-btn">ЗАВЕРШИТИ СЕСІЮ // ВИХІД</a>
+    </footer>
+
+  </div>
+  <script src="ui.js"></script>
+  <script src="search.js"></script>
+</body>
+</html>

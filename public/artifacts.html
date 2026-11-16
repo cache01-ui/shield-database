@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S.H.I.E.L.D. Secure Archive — Артефакти</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo1.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="terminal-container">
+
+    <header class="top-nav">
+      <p class="system-title">S.H.I.E.L.D. // БАЗА ДАНИХ [РІВЕНЬ ДОСТУПУ 7]</p>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav">☰ МЕНЮ</button>
+      <nav class="tabs-group" id="main-nav" aria-label="Розділи бази даних">
+        <a href="dossier.html" class="tab-link">ДОСЬЄ</a>
+        <a href="threats.html" class="tab-link">МАТРИЦЯ ЗАГРОЗ</a>
+        <a href="incidents.html" class="tab-link">ІНЦИДЕНТИ</a>
+        <a href="artifacts.html" class="tab-link active" aria-current="page">АРТЕФАКТИ</a>
+        <a href="reports.html" class="tab-link">РАПОРТИ</a>
+      </nav>
+    </header>
+
+    <div class="search-panel" role="search">
+      <label for="artifact-search" class="visually-hidden">Пошук артефактів</label>
+      <input type="search" id="artifact-search" class="search-input" data-search-cards=".agent-card" placeholder="[ ПОШУК ЗА НАЗВОЮ / ТИПОМ / ІНЦИДЕНТОМ... ]">
+      <div class="catalog-tools">
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+        <div class="view-toggle" role="group" aria-label="Вигляд каталогу">
+          <button type="button" class="view-btn" data-view="grid" aria-pressed="true">СІТКА</button>
+          <button type="button" class="view-btn" data-view="list" aria-pressed="false">СПИСОК</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="cards-row">
+      <h1 class="visually-hidden">Каталог артефактів</h1>
+
+      <article class="agent-card" data-keywords="тессеракт камінь простору space stone tesseract куб нью-йорк">
+        <a href="incident_profile.html?id=newyork-2012#artifact-tesseract" class="card-link">
+          <img src="art-tesseract.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-retired">ПОВЕРНУТО // 2023</p>
+            <h2 class="agent-name">ТЕССЕРАКТ</h2>
+            <p class="agent-desc">Тип: Контейнер Каменя Простору | Статус: Повернуто в історичну часову лінію</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2012-NY</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="agent-card" data-keywords="камінь розуму mind stone віжен скіпетр соковія">
+        <a href="incident_profile.html?id=sokovia-2015#artifact-mind-stone" class="card-link">
+          <img src="art-mind-stone.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-kia">ЗНИЩЕНО // 2018</p>
+            <h2 class="agent-name">КАМІНЬ РОЗУМУ</h2>
+            <p class="agent-desc">Тип: Камінь Нескінченності | Статус: Вилучено з Віжена, знищено</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2015-SOKOV</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="agent-card" data-keywords="камінь сили power stone орб ронан ксандар">
+        <a href="incident_profile.html?id=xandar-2014#artifact-power-stone" class="card-link">
+          <img src="art-power-stone.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-kia">ЗНИЩЕНО // 2018</p>
+            <h2 class="agent-name">КАМІНЬ СИЛИ</h2>
+            <p class="agent-desc">Тип: Камінь Нескінченності | Статус: Вилучено Таносом із Ксандара</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2014-XANDAR</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="agent-card" data-keywords="камені нескінченності рукавиця танос infinity stones gauntlet клацання">
+        <a href="incident_profile.html?id=infinity-war-2018#artifact-infinity-stones" class="card-link">
+          <img src="art-infinity.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-kia">ЗНИЩЕНО // 2023</p>
+            <h2 class="agent-name">КАМЕНІ НЕСКІНЧЕННОСТІ</h2>
+            <p class="agent-desc">Тип: Набір космічних артефактів | Статус: Нейтралізовано після клацання</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2018-INFINITY</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="agent-card" data-keywords="мйольнір молот тор mjolnir хела асгард рагнарок">
+        <a href="incident_profile.html?id=ragnarok-asgard" class="card-link">
+          <img src="art-mjolnir.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-lost">ЗРУЙНОВАНО // 2017</p>
+            <h2 class="agent-name">МЙОЛЬНІР</h2>
+            <p class="agent-desc">Тип: Зброя з уру | Статус: Знищений Хелою, фрагменти під наглядом Асґарду</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2017-RAGNAROK</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="agent-card" data-keywords="щит вібраніум капітан америка shield vibranium роджерс вілсон">
+        <a href="incident_profile.html?id=civil-war-2016" class="card-link">
+          <img src="art-shield.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-active">АКТИВНИЙ</p>
+            <h2 class="agent-name">ЩИТ ІЗ ВІБРАНІУМУ</h2>
+            <p class="agent-desc">Тип: Оборонне спорядження | Статус: Переданий С. Вілсону</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2016-ACCORDS</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="agent-card" data-keywords="скіпетр локі scepter loki гідра камінь розуму">
+        <a href="incident_profile.html?id=sokovia-2015" class="card-link">
+          <img src="art-scepter.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-retired">ДЕМОНТОВАНО</p>
+            <h2 class="agent-name">СКІПЕТР ЛОКІ</h2>
+            <p class="agent-desc">Тип: Читаурська зброя | Статус: Камінь вилучено, корпус в архіві Щ.И.Т.</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2015-SOKOV</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="agent-card" data-keywords="око агамотто камінь часу time stone стрендж камар-тадж">
+        <a href="incident_profile.html?id=kamar-taj-attack" class="card-link">
+          <img src="art-eye.svg" alt="" class="agent-photo" width="480" height="340">
+          <div class="agent-info">
+            <p class="badge badge-kia">ЗНИЩЕНО // 2018</p>
+            <h2 class="agent-name">ОКО АГАМОТТО</h2>
+            <p class="agent-desc">Тип: Містична реліквія (Камінь Часу) | Статус: Камінь віддано Таносу</p>
+            <p class="artifact-meta">ІНЦИДЕНТ: INC-2016-KAMAR-TAJ</p>
+          </div>
+        </a>
+      </article>
+
+      <p class="empty-state" hidden>ЗА ЗАПИТОМ НІЧОГО НЕ ЗНАЙДЕНО</p>
+    </main>
+
+    <footer class="page-footer">
+      <a href="index.html" class="logout-btn">ЗАВЕРШИТИ СЕСІЮ // ВИХІД</a>
+    </footer>
+
+  </div>
+  <script src="ui.js"></script>
+  <script src="search.js"></script>
+</body>
+</html>

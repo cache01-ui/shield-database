@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340">
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#18212b"/><stop offset="1" stop-color="#06090e"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#a855f7" stop-opacity=".5"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#a855f7" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="480" height="340" fill="url(#bg)"/><rect width="480" height="340" fill="url(#grid)"/>
+<circle cx="240" cy="150" r="175" fill="url(#glow)"/>
+
+<path d="M240 30c-30 40-92 52-92 132 0 64 42 104 92 104s92-40 92-104c0-80-62-92-92-132z" fill="#2e1065" stroke="#c084fc" stroke-width="3"/>
+<path d="M240 70c-18 30-60 42-60 100 0 44 28 72 60 72s60-28 60-72c0-58-42-70-60-100z" fill="#4c1d95"/>
+<path d="M150 120c-30-30-36-64-24-90 6 30 20 46 40 56M330 120c30-30 36-64 24-90-6 30-20 46-40 56" fill="#f97316" fill-opacity=".85"/>
+<path d="M206 162q16-12 26 4M248 166q10-16 26-4" stroke="#fde68a" stroke-width="7" stroke-linecap="round" fill="none"/>
+<path d="M218 206q22 14 44 0" stroke="#fb923c" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path d="M120 300q40-40 60-10t60-30 60 30 60 10" fill="none" stroke="#f97316" stroke-opacity=".6" stroke-width="4"/>
+<path d="M16 16h28M16 16v28M464 16h-28M464 16v28M16 324h28M16 324v-28M464 324h-28M464 324v-28" stroke="#a855f7" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<text x="240" y="318" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="6" fill="#a855f7" fill-opacity=".9">DARK DIMENSION</text>
+</svg>

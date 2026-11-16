@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340">
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#18212b"/><stop offset="1" stop-color="#06090e"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#22c55e" stop-opacity=".5"/><stop offset="1" stop-color="#22c55e" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#22c55e" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="480" height="340" fill="url(#bg)"/><rect width="480" height="340" fill="url(#grid)"/>
+<circle cx="240" cy="150" r="175" fill="url(#glow)"/>
+
+<g transform="translate(240 150)"><path d="M-96 0q96-110 192 0-96 110-192 0z" fill="#422006" stroke="#fbbf24" stroke-width="4"/>
+<circle r="40" fill="#14532d" stroke="#fbbf24" stroke-width="3"/><circle r="22" fill="#4ade80"/><circle r="8" fill="#052e16"/>
+<path d="M-96 0h-30M96 0h30M0-62v-36" stroke="#fbbf24" stroke-width="4"/></g>
+<path d="M16 16h28M16 16v28M464 16h-28M464 16v28M16 324h28M16 324v-28M464 324h-28M464 324v-28" stroke="#22c55e" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<text x="240" y="318" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="6" fill="#22c55e" fill-opacity=".9">TIME STONE</text>
+</svg>

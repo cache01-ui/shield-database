@@ -1,0 +1,2149 @@
+/* =====================================================================
+   S.H.I.E.L.D. DATABASE — єдина таблиця стилів
+   ---------------------------------------------------------------------
+   1.  Дизайн-токени (кольори, шрифти, відступи)
+   2.  Скидання стилів та базові елементи
+   3.  Загальний каркас сторінки (термінал, шапка, навігація, футер)
+   4.  Спільні компоненти (кнопки, бейджі, пошук, картки даних)
+   5.  Головна сторінка — портал (index.html)
+   6.  Термінал авторизації (Terminal_login.html)
+   7.  Каталоги з картками (dossier.html, threats.html, artifacts.html)
+   8.  Профілі досьє та загроз (dossier_profile.html, threat_profile.html)
+   9.  Журнал інцидентів (incidents.html)
+   10. Профіль інциденту (incident_profile.html)
+   11. Адаптивність (медіазапити: ноутбук → планшет → мобільний)
+   12. Інтерактивні компоненти JavaScript (ЛР № 4)
+   13. Дані із сервера та польові рапорти (ЛР № 5)
+   ===================================================================== */
+
+
+/* ============ 1. ДИЗАЙН-ТОКЕНИ ============ */
+:root {
+  /* Фони */
+  --bg-page: #05090e;
+  --bg-surface: #141820;
+  --bg-panel: #181c24;
+  --bg-deep: #09101a;
+  --bg-alert: #1a1215;
+
+  /* Межі */
+  --border: #283040;
+  --border-strong: #1b5380;
+
+  /* Текст */
+  --text: #d8e2ec;
+  --text-strong: #ffffff;
+  --text-muted: #8c96a5;
+  --text-dim: #5b758a;
+
+  /* Акценти */
+  --accent: #00e5ff;
+  --accent-soft: #38bdf8;
+  --accent-teal: #00d2df;
+  --danger: #ff3b5c;
+  --danger-strong: #ff383c;
+  --warning: #ffb800;
+  --success: #00e676;
+  --highlight: #ffd500;
+
+  /* Типографіка */
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-body: Arial, Helvetica, sans-serif;
+
+  /* Відступи та розміри */
+  --page-gutter: 48px;
+  --gap-lg: 32px;
+  --gap-md: 20px;
+  --gap-sm: 12px;
+  --radius: 6px;
+  --container-max: 1440px;
+}
+
+
+/* ============ 2. СКИДАННЯ ТА БАЗА ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 24px 20px;
+  background-color: var(--bg-page);
+  color: var(--text);
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Текст лише для скрінрідерів */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+
+/* ============ 3. КАРКАС СТОРІНКИ ============ */
+.terminal-container {
+  width: 100%;
+  max-width: var(--container-max);
+  min-height: calc(100vh - 48px);
+  margin: 0 auto;
+  background-color: var(--bg-surface);
+  outline: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Шапка внутрішніх сторінок */
+.top-nav {
+  min-height: 72px;
+  padding: 0 var(--page-gutter);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.system-title {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.tabs-group {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.tab-link {
+  padding: 12px 16px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.tab-link:hover,
+.tab-link.active {
+  color: var(--accent);
+}
+
+.tab-link.active {
+  font-weight: 700;
+  background: rgba(0, 229, 255, 0.08);
+  border-bottom: 2px solid var(--accent);
+}
+
+/* Хлібні крихти (повернення до каталогу) */
+.breadcrumb-bar {
+  padding: 20px var(--page-gutter);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.back-btn:hover {
+  opacity: 0.8;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+}
+
+/* Футер внутрішніх сторінок */
+.page-footer {
+  margin-top: auto;
+  padding: 0 var(--page-gutter) var(--page-gutter);
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ============ 4. СПІЛЬНІ КОМПОНЕНТИ ============ */
+
+/* --- Кнопки --- */
+.btn-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 32px;
+  background: rgba(0, 210, 255, 0.5);
+  border: 1px solid transparent;
+  color: var(--text-strong);
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.btn-primary:hover {
+  background: rgba(0, 210, 255, 0.65);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(0, 210, 255, 0.5);
+}
+
+.logout-btn {
+  padding: 14px 28px;
+  background: var(--bg-surface);
+  border: 1.6px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-strong);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.logout-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* --- Бейджі статусу (каталог досьє) --- */
+.badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.badge-kia {
+  background: rgba(255, 59, 92, 0.14);
+  outline: 1px solid var(--danger);
+  outline-offset: -1px;
+  color: var(--danger);
+}
+
+.badge-lost {
+  background: rgba(140, 150, 165, 0.14);
+  outline: 1px solid rgba(255, 51, 75, 0.4);
+  outline-offset: -1px;
+  color: #ff334b;
+}
+
+.badge-retired {
+  background: rgba(140, 150, 165, 0.14);
+  outline: 1px solid var(--text-muted);
+  outline-offset: -1px;
+  color: var(--text-muted);
+}
+
+.badge-active {
+  background: rgba(0, 230, 118, 0.14);
+  outline: 1px solid var(--success);
+  outline-offset: -1px;
+  color: var(--success);
+}
+
+/* --- Панель пошуку --- */
+.search-panel {
+  min-height: 64px;
+  padding: 0 var(--page-gutter);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 20px 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--text-strong);
+  font-size: 13px;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* --- Картка даних (профілі) --- */
+.data-card {
+  padding: 24px 28px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+}
+
+.card-header-cyan {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.card-text {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+
+/* ============ 5. ПОРТАЛ (index.html) ============ */
+.portal {
+  padding: 26px 34px 64px;
+  gap: 40px;
+}
+
+/* Шапка порталу: логотип + заголовок + цитата (Grid) */
+.portal-header {
+  display: grid;
+  grid-template-columns: 254px minmax(0, 1fr);
+  column-gap: 62px;
+  align-items: start;
+}
+
+.portal-logo {
+  width: 254px;
+  height: 184px;
+  margin-top: 52px;
+  object-fit: contain;
+}
+
+.portal-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.portal-title {
+  align-self: center;
+  color: var(--accent-soft);
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.portal-subtitle {
+  color: var(--text-strong);
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.portal-quote {
+  padding: 26px 20px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  color: var(--text-strong);
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+/* Два інформаційні блоки (Grid) */
+.portal-main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(24px, 19vw, 274px);
+  row-gap: var(--gap-lg);
+  align-items: stretch;
+}
+
+.info-box {
+  min-height: 456px;
+  padding: 18px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.info-box h2 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.academy-box {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+}
+
+.academy-box h2,
+.dept-title {
+  color: var(--accent-soft);
+}
+
+.lead-text {
+  color: var(--text-strong);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.dept-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dept-title {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.dept-desc {
+  color: var(--text-strong);
+  font-size: 16px;
+}
+
+.warning-box {
+  background: var(--bg-alert);
+  border: 1px solid #ff5050;
+  color: var(--danger-strong);
+}
+
+.warning-box p {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.warning-box strong {
+  font-weight: 700;
+}
+
+.portal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.portal-footer .btn-primary {
+  width: min(480px, 100%);
+  min-height: 73px;
+}
+
+
+/* ============ 6. ТЕРМІНАЛ АВТОРИЗАЦІЇ ============ */
+.login-terminal {
+  position: relative;
+  padding: 24px 36px;
+  background-color: var(--bg-deep);
+  outline-color: var(--border-strong);
+  align-items: center;
+}
+
+.login-header {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.login-header .system-title {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.login-logo {
+  position: absolute;
+  top: 64px;
+  left: 36px;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.login-main {
+  width: 100%;
+  padding-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-title-block {
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.login-title {
+  margin-bottom: 8px;
+  color: var(--text-strong);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+
+.login-subtitle {
+  color: #00d2ff;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+}
+
+.restricted-badge {
+  margin-bottom: 48px;
+  padding: 12px 48px;
+  border: 1px solid #ff2a2a;
+  background: rgba(255, 42, 42, 0.05);
+  color: #ff2a2a;
+  font-size: 22px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.terminal-input {
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--bg-page);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  outline: none;
+  color: var(--text-strong);
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.terminal-input:focus {
+  border-color: #00d2ff;
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+}
+
+.terminal-input::placeholder {
+  color: #4a6378;
+}
+
+.submit-btn {
+  margin-top: 12px;
+  padding: 14px 0;
+  background-color: #1b3852;
+  border: 1px solid #336d99;
+  color: var(--text-strong);
+  font-size: 18px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #255177;
+  border-color: #00d2ff;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.5);
+}
+
+.login-footer {
+  width: min(80%, 1000px);
+  margin-top: auto;
+  padding-top: 48px;
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.login-footer p + p {
+  margin-top: 16px;
+}
+
+
+/* ============ 7. КАТАЛОГИ З КАРТКАМИ ============ */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap-lg);
+  padding: 36px var(--page-gutter) var(--page-gutter);
+}
+
+/* --- Картка оперативника / артефакту --- */
+.agent-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border-radius: 8px;
+  outline: 1px solid var(--border);
+  outline-offset: -1px;
+  transition: transform 0.2s, outline-color 0.2s;
+}
+
+.agent-card[hidden] {
+  display: none;
+}
+
+.agent-card:hover,
+.agent-card:focus-within {
+  transform: translateY(-4px);
+  outline-color: var(--accent);
+}
+
+.card-link {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-link:focus-visible {
+  outline: none;
+}
+
+.agent-photo {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  background-color: var(--bg-deep);
+  border-bottom: 1px solid var(--border);
+}
+
+.agent-photo.photo-top {
+  object-position: top center;
+}
+
+.agent-info {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.agent-name {
+  color: var(--text-strong);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.agent-desc {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+/* --- Картка загрози (генерується threats.js) --- */
+.threat-grid {
+  padding-top: 10px;
+  padding-inline: 28px;
+}
+
+.threat-card {
+  min-width: 0;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.threat-card:hover,
+.threat-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: #00d2ff;
+}
+
+.threat-photo {
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--border);
+}
+
+.threat-info {
+  min-height: 132px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.threat-badge {
+  display: inline-flex;
+  padding: 3px 6px;
+  border: 1px solid;
+  border-radius: 3px;
+  font-size: 9px;
+  line-height: 1.35;
+  letter-spacing: 0.3px;
+}
+
+.badge-danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.badge-warning {
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.threat-info h2 {
+  color: var(--text-strong);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.threat-callsign {
+  color: var(--accent-soft);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.threat-summary {
+  color: var(--text-muted);
+  font: 12px/1.6 var(--font-body);
+}
+
+/* --- Картка артефакту --- */
+.artifact-meta {
+  margin-top: auto;
+  color: var(--highlight);
+  font-size: 11px;
+}
+
+
+/* ============ 8. ПРОФІЛІ ДОСЬЄ ТА ЗАГРОЗ ============ */
+.dossier-body {
+  padding: 10px var(--page-gutter) var(--page-gutter);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  min-width: 0;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.profile-photo {
+  width: 192px;
+  height: 250px;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-color: var(--bg-deep);
+  border: 1px solid var(--border);
+}
+
+.profile-meta {
+  color: var(--text-strong);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+/* Варіант для профілю загрози */
+.threat-profile .profile-photo {
+  width: 154px;
+  height: 200px;
+}
+
+.threat-profile .left-column > .data-card {
+  min-height: 302px;
+}
+
+.threat-profile .right-column > .data-card:first-child {
+  min-height: 351px;
+}
+
+.threat-profile .right-column > .data-card:last-child {
+  min-height: 226px;
+}
+
+
+/* ============ 9. ЖУРНАЛ ІНЦИДЕНТІВ ============ */
+.filter-bar {
+  min-height: 52px;
+  padding: 10px var(--page-gutter);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.filter-bar label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.filter-bar select {
+  background: var(--bg-panel);
+  color: #aab4c2;
+  border: 0;
+  cursor: pointer;
+}
+
+.incident-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  padding: 38px 22px 48px;
+}
+
+.incident-row {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  gap: var(--gap-sm);
+  align-items: stretch;
+  color: inherit;
+  text-decoration: none;
+}
+
+.incident-image-slot,
+.incident-photo {
+  width: 100%;
+  min-height: 120px;
+  background: #10151d;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.incident-summary {
+  min-width: 0;
+  padding: 14px 12px 8px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.incident-row:hover .incident-summary,
+.incident-row:hover .incident-image-slot,
+.incident-row:hover .incident-photo,
+.incident-row:focus-visible .incident-summary {
+  border-color: #00d2ff;
+}
+
+.incident-heading {
+  display: grid;
+  grid-template-columns: minmax(185px, 0.35fr) minmax(250px, 1fr);
+  gap: 18px;
+  color: #f0f3f8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.field-label {
+  color: var(--highlight);
+  font-weight: 500;
+}
+
+.incident-description {
+  margin-top: 13px;
+  color: #e2e8f0;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.incident-badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.severity-tag,
+.status-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  border: 1px solid var(--danger);
+  color: #e6dbe0;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+}
+
+.severity-tag {
+  background: rgba(255, 59, 92, 0.1);
+}
+
+.severity-tag.critical {
+  color: #ff4c62;
+}
+
+.status-tag {
+  border-color: var(--accent-teal);
+  color: #c9f9fb;
+  background: rgba(0, 210, 223, 0.08);
+}
+
+.status-tag.restricted {
+  border-color: #ff334b;
+  color: #ff4055;
+  background: rgba(255, 51, 75, 0.08);
+}
+
+
+/* ============ 10. ПРОФІЛЬ ІНЦИДЕНТУ ============ */
+.incident-profile {
+  padding: 20px 50px 60px;
+}
+
+.incident-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.95fr);
+  gap: 44px;
+  align-items: start;
+}
+
+.incident-overview {
+  min-height: 190px;
+  display: grid;
+  grid-template-columns: minmax(160px, 256px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.incident-image-slot.large,
+.incident-photo.large {
+  height: 120px;
+  border-radius: 0;
+}
+
+.incident-meta {
+  color: #f2f4f8;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.faction-grid {
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.faction-card {
+  min-width: 0;
+  min-height: 210px;
+  padding: 18px 14px;
+  border: 1px solid var(--accent-teal);
+  background: rgba(0, 210, 223, 0.05);
+}
+
+.faction-card.enemy {
+  border-color: #ff334b;
+  background: rgba(255, 51, 75, 0.16);
+}
+
+.faction-card h2 {
+  margin-bottom: 14px;
+  color: #f2f4f8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.faction-card p,
+.faction-card li {
+  color: #f2f4f8;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.faction-card ul {
+  margin: 4px 0;
+  padding-left: 16px;
+  list-style: square;
+}
+
+.faction-result {
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.incident-aside {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+/* Компактніша картка даних у бічній колонці інциденту */
+.incident-aside .data-card {
+  min-height: 156px;
+  padding: 22px 18px;
+  border-width: 1px;
+}
+
+.incident-aside .data-card.key-factor {
+  border-width: 3px;
+}
+
+.incident-aside .card-header-cyan {
+  padding-bottom: 0;
+  border-bottom: 0;
+  color: var(--accent-soft);
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.incident-aside .card-text {
+  color: #f2f4f8;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.related-section {
+  margin-top: 60px;
+  padding: 0 10px;
+}
+
+.related-section > h2,
+.artifact-notes > h2 {
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+}
+
+.related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+.related-link {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+}
+
+.related-link:hover {
+  text-decoration: underline;
+}
+
+.related-link.threat {
+  color: var(--danger);
+}
+
+.related-link.artifact {
+  color: var(--highlight);
+}
+
+.artifact-notes {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.artifact-notes > h2 {
+  grid-column: 1 / -1;
+}
+
+.artifact-note {
+  padding: 12px;
+  border: 1px solid rgba(255, 213, 0, 0.55);
+  scroll-margin-top: 20px;
+}
+
+.artifact-note h3 {
+  margin-bottom: 8px;
+  color: var(--highlight);
+  font-size: 12px;
+}
+
+.artifact-note p {
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* ============ 11. АДАПТИВНІСТЬ ============ */
+
+/* --- Невеликий десктоп / ноутбук --- */
+@media (max-width: 1200px) {
+  :root {
+    --page-gutter: 32px;
+  }
+
+  .cards-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .portal-header {
+    grid-template-columns: 200px minmax(0, 1fr);
+    column-gap: 32px;
+  }
+
+  .portal-logo {
+    width: 200px;
+    height: 150px;
+  }
+
+  .portal-quote,
+  .portal-subtitle,
+  .lead-text,
+  .info-box h2,
+  .dept-title,
+  .warning-box p {
+    font-size: 18px;
+  }
+}
+
+/* --- Планшет --- */
+@media (max-width: 900px) {
+  :root {
+    --page-gutter: 24px;
+  }
+
+  body {
+    padding: 12px;
+  }
+
+  .terminal-container {
+    min-height: calc(100vh - 24px);
+  }
+
+  .top-nav {
+    padding-block: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .tabs-group {
+    max-width: 100%;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  .tab-link {
+    padding: 10px 12px;
+  }
+
+  /* Портал */
+  .portal {
+    padding: 24px;
+    gap: 28px;
+  }
+
+  .portal-header {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 16px;
+  }
+
+  .portal-logo {
+    width: 180px;
+    height: 130px;
+    margin-top: 0;
+  }
+
+  .portal-title,
+  .portal-subtitle {
+    text-align: center;
+  }
+
+  .portal-subtitle {
+    margin-bottom: 4px;
+  }
+
+  .portal-main {
+    grid-template-columns: 1fr;
+  }
+
+  .info-box {
+    min-height: 0;
+  }
+
+  /* Авторизація */
+  .login-logo {
+    position: static;
+    width: 96px;
+    height: 96px;
+  }
+
+  .login-main {
+    padding-top: 24px;
+  }
+
+  .login-title {
+    font-size: 26px;
+  }
+
+  .login-footer {
+    width: 100%;
+  }
+
+  /* Каталоги */
+  .cards-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 24px var(--page-gutter);
+    gap: 18px;
+  }
+
+  .agent-photo {
+    height: 190px;
+  }
+
+  /* Профілі */
+  .dossier-body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .threat-profile .left-column > .data-card,
+  .threat-profile .right-column > .data-card:first-child,
+  .threat-profile .right-column > .data-card:last-child {
+    min-height: 0;
+  }
+
+  /* Інциденти */
+  .incident-row {
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .incident-heading {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .incident-profile {
+    padding: 10px 22px 32px;
+  }
+
+  .incident-main-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .incident-aside {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* --- Мобільний --- */
+@media (max-width: 560px) {
+  :root {
+    --page-gutter: 16px;
+  }
+
+  body {
+    padding: 0;
+  }
+
+  .terminal-container {
+    min-height: 100vh;
+    outline: 0;
+  }
+
+  .system-title {
+    font-size: 12px;
+  }
+
+  .tabs-group {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .tab-link {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .back-btn {
+    font-size: 13px;
+  }
+
+  /* Портал */
+  .portal {
+    padding: 20px 16px 32px;
+  }
+
+  .portal-title {
+    font-size: 20px;
+  }
+
+  .portal-quote,
+  .portal-subtitle,
+  .lead-text,
+  .info-box h2,
+  .dept-title,
+  .warning-box p {
+    font-size: 16px;
+  }
+
+  .dept-desc {
+    font-size: 14px;
+  }
+
+  .portal-quote {
+    padding: 18px 16px;
+  }
+
+  .portal-footer .btn-primary {
+    padding: 18px 16px;
+    font-size: 14px;
+  }
+
+  /* Авторизація */
+  .login-terminal {
+    padding: 20px 16px;
+  }
+
+  .login-title {
+    font-size: 20px;
+    letter-spacing: 1.5px;
+  }
+
+  .login-subtitle {
+    font-size: 15px;
+  }
+
+  .restricted-badge {
+    padding: 10px 16px;
+    font-size: 16px;
+  }
+
+  .terminal-input,
+  .submit-btn {
+    font-size: 15px;
+  }
+
+  /* Каталоги */
+  .cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-photo {
+    height: 220px;
+  }
+
+  .threat-photo {
+    height: 200px;
+  }
+
+  /* Профілі */
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-meta {
+    font-size: 14px;
+  }
+
+  .data-card {
+    padding: 18px 16px;
+  }
+
+  .card-header-cyan {
+    font-size: 15px;
+  }
+
+  .card-text {
+    font-size: 13px;
+  }
+
+  /* Інциденти */
+  .incident-list {
+    padding: 18px 14px;
+    gap: 18px;
+  }
+
+  .incident-row {
+    grid-template-columns: 1fr;
+  }
+
+  .incident-row .incident-art {
+    height: 110px;
+  }
+
+  .incident-badges {
+    gap: 8px;
+  }
+
+  .incident-profile {
+    padding: 8px 14px 28px;
+  }
+
+  .incident-overview,
+  .incident-aside,
+  .faction-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faction-grid {
+    margin-top: 18px;
+  }
+
+  .related-section {
+    margin-top: 32px;
+    padding: 0;
+  }
+}
+
+
+/* ============ 12. ІНТЕРАКТИВНІ КОМПОНЕНТИ (JavaScript) ============ */
+
+/* --- Бейдж агента в шапці --- */
+.agent-badge {
+  margin-right: auto;
+  margin-left: 20px;
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 230, 118, 0.5);
+  color: var(--success);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.agent-badge.is-guest {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+/* --- Кнопка мобільного меню (видима лише на телефоні) --- */
+.nav-toggle {
+  display: none;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  border-color: var(--accent);
+}
+
+/* --- Діалог підтвердження виходу --- */
+.confirm-dialog {
+  width: min(440px, calc(100% - 32px));
+  margin: auto;
+  padding: 28px 24px 24px;
+  background: var(--bg-surface);
+  border: 1px solid var(--danger);
+  color: var(--text);
+  box-shadow: 0 0 40px rgba(255, 59, 92, 0.25);
+}
+
+.confirm-dialog::backdrop {
+  background: rgba(5, 9, 14, 0.8);
+}
+
+.confirm-dialog h2 {
+  margin-bottom: 12px;
+  color: var(--danger);
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.confirm-text {
+  margin-bottom: 24px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.confirm-actions button {
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-strong);
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.confirm-actions .confirm-ok {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.confirm-actions button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Кнопка «Нагору» --- */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  padding: 10px 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* --- Панель інструментів каталогу: лічильник + перемикач вигляду --- */
+.search-panel {
+  gap: var(--gap-md);
+}
+
+.catalog-tools {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.result-count {
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.filter-bar .result-count {
+  margin-left: auto;
+}
+
+.view-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+}
+
+.view-btn {
+  padding: 8px 12px;
+  background: transparent;
+  border: 0;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.view-btn + .view-btn {
+  border-left: 1px solid var(--border);
+}
+
+.view-btn[aria-pressed="true"] {
+  background: rgba(0, 229, 255, 0.08);
+  color: var(--accent);
+}
+
+/* Вигляд «Список»: картки в один стовпчик, фото ліворуч */
+.cards-row.is-list {
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.cards-row.is-list .card-link,
+.cards-row.is-list .threat-card {
+  flex-direction: row;
+}
+
+.cards-row.is-list .agent-photo,
+.cards-row.is-list .threat-photo {
+  width: 220px;
+  height: auto;
+  min-height: 140px;
+  flex-shrink: 0;
+  border-bottom: 0;
+  border-right: 1px solid var(--border);
+}
+
+.cards-row.is-list .threat-info {
+  min-height: 0;
+}
+
+/* --- Згенерована схема інциденту --- */
+.incident-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.incident-art.large {
+  height: 150px;
+  border-radius: 0;
+}
+
+.incident-row:hover .incident-art,
+.incident-row:focus-visible .incident-art {
+  border-color: #00d2ff;
+}
+
+/* --- Форма авторизації: поля, підказки, помилки --- */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label-text {
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.field-hint {
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.field-error {
+  min-height: 1.4em;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.field-error:empty {
+  min-height: 0;
+}
+
+.terminal-input.is-invalid {
+  border-color: var(--danger);
+  box-shadow: 0 0 10px rgba(255, 59, 92, 0.3);
+}
+
+.terminal-input.is-valid {
+  border-color: var(--success);
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap .terminal-input {
+  padding-right: 110px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+.form-status {
+  min-height: 1.5em;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.form-status.is-error {
+  color: var(--danger);
+}
+
+.form-status.is-success {
+  color: var(--success);
+}
+
+/* --- Адаптивність інтерактивних компонентів --- */
+@media (max-width: 900px) {
+  .agent-badge {
+    margin: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .top-nav {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .agent-badge {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .nav-toggle {
+    display: block;
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .js .tabs-group {
+    display: none;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .js .tabs-group.is-open {
+    display: flex;
+  }
+
+  .search-panel {
+    flex-wrap: wrap;
+    gap: 0;
+    padding-bottom: 12px;
+  }
+
+  .catalog-tools {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cards-row.is-list .card-link,
+  .cards-row.is-list .threat-card {
+    flex-direction: column;
+  }
+
+  .cards-row.is-list .agent-photo,
+  .cards-row.is-list .threat-photo {
+    width: 100%;
+    height: 180px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .back-to-top {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+
+/* ============ 13. ДАНІ ІЗ СЕРВЕРА ТА ПОЛЬОВІ РАПОРТИ ============ */
+
+/* --- Стан завантаження / помилки --- */
+.load-state {
+  grid-column: 1 / -1;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-muted);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.load-state.is-loading p::after {
+  content: '▌';
+  margin-left: 4px;
+  animation: blink 1s steps(1) infinite;
+}
+
+.load-state.is-error {
+  color: var(--danger);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .load-state.is-loading p::after { animation: none; }
+  .back-to-top { transition: none; }
+}
+
+.retry-btn,
+.new-report-btn,
+.report-btn {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.retry-btn:hover,
+.new-report-btn:hover,
+.report-btn:hover {
+  background: rgba(0, 229, 255, 0.08);
+}
+
+/* Профіль досьє: обгортка не впливає на сітку колонок */
+.dossier-columns {
+  display: contents;
+}
+
+/* --- Панель інструментів рапортів --- */
+.report-toolbar {
+  gap: 8px 12px;
+}
+
+.report-search {
+  flex: 1 1 260px;
+  padding: 10px 0;
+}
+
+.report-toolbar .result-count {
+  margin-left: auto;
+}
+
+.new-report-btn {
+  background: rgba(0, 229, 255, 0.1);
+  font-weight: 700;
+}
+
+/* --- Список рапортів --- */
+.report-list {
+  padding: 32px var(--page-gutter) var(--page-gutter);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-content: start;
+}
+
+.report-card {
+  min-width: 0;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-teal);
+}
+
+.report-card.priority-high { border-left-color: var(--warning); }
+.report-card.priority-critical { border-left-color: var(--danger); }
+.report-card.priority-low { border-left-color: var(--text-muted); }
+
+.report-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.report-title {
+  color: var(--text-strong);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.report-tags {
+  flex-shrink: 0;
+  display: flex;
+  gap: 6px;
+}
+
+.report-tag {
+  padding: 3px 7px;
+  border: 1px solid var(--border);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.tag-low { color: var(--text-muted); }
+.tag-medium { color: var(--accent-teal); border-color: var(--accent-teal); }
+.tag-high { color: var(--warning); border-color: var(--warning); }
+.tag-critical { color: var(--danger); border-color: var(--danger); background: rgba(255, 59, 92, 0.1); }
+.tag-status-draft { color: var(--text-muted); }
+.tag-status-active { color: var(--success); border-color: rgba(0, 230, 118, 0.5); }
+.tag-status-closed { color: var(--accent-soft); }
+
+.report-meta {
+  color: var(--highlight);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.report-incident {
+  color: var(--accent);
+}
+
+.report-incident.is-empty {
+  color: var(--text-dim);
+}
+
+.report-body {
+  color: var(--text);
+  font: 13px/1.6 var(--font-body);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+.report-foot {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.report-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.report-btn {
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+.report-btn.is-danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.report-btn.is-danger:hover {
+  background: rgba(255, 59, 92, 0.1);
+}
+
+/* --- Діалог форми рапорту --- */
+.report-dialog {
+  width: min(720px, calc(100% - 24px));
+  max-height: calc(100vh - 24px);
+  margin: auto;
+  padding: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 40px rgba(0, 229, 255, 0.2);
+}
+
+.report-dialog::backdrop {
+  background: rgba(5, 9, 14, 0.85);
+}
+
+.report-form {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.report-form h2 {
+  color: var(--accent);
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.form-row-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.report-form .terminal-input {
+  padding: 10px 12px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.report-form select.terminal-input {
+  cursor: pointer;
+}
+
+.report-form textarea.terminal-input {
+  min-height: 140px;
+  resize: vertical;
+  font: 14px/1.5 var(--font-body);
+}
+
+.char-count {
+  float: right;
+  color: var(--text-dim);
+  letter-spacing: 0;
+}
+
+.confirm-actions .confirm-save {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.confirm-actions button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* --- Спливаюче повідомлення --- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 20;
+  max-width: calc(100% - 32px);
+  padding: 12px 18px;
+  background: var(--bg-panel);
+  border: 1px solid var(--success);
+  color: var(--success);
+  font-size: 13px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 10px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+
+.toast.is-error {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* --- Сторінка 404 --- */
+.not-found {
+  margin: auto 0;
+  gap: 8px;
+}
+
+.not-found-text {
+  max-width: 520px;
+  margin-bottom: 32px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .report-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .form-row,
+  .form-row-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .report-head {
+    flex-direction: column;
+  }
+
+  .report-search {
+    flex-basis: 100%;
+  }
+
+  .report-toolbar .result-count {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .new-report-btn {
+    width: 100%;
+  }
+}

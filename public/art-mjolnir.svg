@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340">
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#18212b"/><stop offset="1" stop-color="#06090e"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#93c5fd" stop-opacity=".5"/><stop offset="1" stop-color="#93c5fd" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#93c5fd" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="480" height="340" fill="url(#bg)"/><rect width="480" height="340" fill="url(#grid)"/>
+<circle cx="240" cy="150" r="175" fill="url(#glow)"/>
+
+<g transform="translate(240 150) rotate(-20)"><rect x="-10" y="0" width="20" height="130" rx="6" fill="#78350f" stroke="#fcd34d" stroke-width="2"/>
+<path d="M-10 20h20M-10 44h20M-10 68h20M-10 92h20" stroke="#fcd34d" stroke-opacity=".6"/>
+<rect x="-86" y="-70" width="172" height="78" rx="12" fill="#4b5563" stroke="#cbd5e1" stroke-width="3"/>
+<path d="M-60-50l20 18-20 18M60-50l-20 18 20 18" fill="none" stroke="#cbd5e1" stroke-width="3"/><path d="M0 130v24" stroke="#cbd5e1" stroke-width="6"/></g>
+<path d="M120 60l20 30-14 4 18 30M360 70l-18 28 14 4-16 30" fill="none" stroke="#93c5fd" stroke-width="3"/>
+<path d="M16 16h28M16 16v28M464 16h-28M464 16v28M16 324h28M16 324v-28M464 324h-28M464 324v-28" stroke="#93c5fd" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<text x="240" y="318" text-anchor="middle" font-family="monospace" font-size="15" letter-spacing="6" fill="#93c5fd" fill-opacity=".9">URU // DESTROYED</text>
+</svg>
