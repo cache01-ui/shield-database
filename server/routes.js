@@ -9,7 +9,9 @@ const handle = fn => (req, res, next) => {
 
 const parseJson = text => { try { return JSON.parse(text); } catch { return []; } };
 
-function createApiRouter(db) {
+function createApiRouter(db, photos) {
+  // Фото з public/photos має пріоритет над стандартним зображенням запису.
+  const withPhoto = row => ({ ...row, image: photos.findPhoto(row.id) || row.image });
   const router = express.Router();
 
   const sql = {
@@ -62,14 +64,14 @@ function createApiRouter(db) {
   /* ---------- Загрози (лише читання, пошук ?q=) ---------- */
   router.get('/threats', handle((req, res) => {
     const q = clean(req.query.q).toLocaleLowerCase('uk').slice(0, 80);
-    let rows = sql.threatList.all();
+    let rows = sql.threatList.all().map(withPhoto);
     if (q) rows = rows.filter(t => `${t.name} ${t.callsign} ${t.role} ${t.summary} ${t.keywords}`.toLocaleLowerCase('uk').includes(q));
     res.json({ total: sql.counts.get().threats, items: rows });
   }));
   router.get('/threats/:id', handle((req, res) => {
     const id = slugParam(req, res); if (!id) return;
     const row = sql.threatById.get(id);
-    return row ? res.json(row) : notFound(res, 'Загрозу');
+    return row ? res.json(withPhoto(row)) : notFound(res, 'Загрозу');
   }));
 
   /* ---------- Інциденти (лише читання, фільтр ?status=, сортування ?sort=) ---------- */
@@ -82,7 +84,7 @@ function createApiRouter(db) {
   router.get('/incidents', handle((req, res) => {
     const filter = incidentFilters[req.query.status] || incidentFilters.all;
     const direction = req.query.sort === 'oldest' ? 1 : -1;
-    const all = sql.incidentList.all();
+    const all = sql.incidentList.all().map(withPhoto);
     const items = all.filter(filter).sort((a, b) => direction * a.sort.localeCompare(b.sort));
     res.json({ total: all.length, items });
   }));
@@ -90,7 +92,7 @@ function createApiRouter(db) {
     const id = slugParam(req, res); if (!id) return;
     const row = sql.incidentById.get(id);
     if (!row) return notFound(res, 'Інцидент');
-    res.json({ ...row, factions: parseJson(row.factions), links: parseJson(row.links), artifacts: parseJson(row.artifacts) });
+    res.json({ ...withPhoto(row), factions: parseJson(row.factions), links: parseJson(row.links), artifacts: parseJson(row.artifacts) });
   }));
 
   /* ---------- Рапорти: повний CRUD ---------- */

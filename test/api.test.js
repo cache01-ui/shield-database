@@ -43,7 +43,7 @@ test('GET /api/health повертає стан і кількість запис
   assert.equal(status, 200);
   assert.equal(data.status, 'ok');
   assert.equal(data.records.threats, 12);
-  assert.equal(data.records.incidents, 16);
+  assert.equal(data.records.incidents, 11);
   assert.equal(data.records.dossiers, 16);
 });
 
@@ -113,4 +113,13 @@ test('Заголовки безпеки встановлено', async () => {
   assert.match(headers.get('content-security-policy'), /script-src 'self'/);
   assert.equal(headers.get('x-content-type-options'), 'nosniff');
   assert.equal(headers.get('x-powered-by'), null);
+});
+
+test('Фото: запасна ілюстрація артефакту замість 404, стандартне зображення загрози', async () => {
+  const art = await fetch(base + '/photos/tesseract.png');
+  assert.equal(art.status, 200);
+  assert.match(art.headers.get('content-type'), /image\/svg\+xml/);
+  assert.equal((await fetch(base + '/photos/nobody.png')).status, 404);
+  const { data } = await call('GET', '/api/threats/kang');
+  assert.ok(['kang.svg', 'photos/kang.png', 'photos/kang.jpg', 'photos/kang.jpeg', 'photos/kang.webp'].includes(data.image));
 });

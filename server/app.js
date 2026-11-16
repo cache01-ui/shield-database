@@ -4,9 +4,11 @@ const helmet = require('helmet');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const { createApiRouter } = require('./routes');
+const { createPhotoService } = require('./photos');
 
 function createApp(db, config) {
   const app = express();
+  const photos = createPhotoService(config.publicDir);
   app.set('trust proxy', 1); // за проксі хостингу (Render) коректно визначаємо IP клієнта
 
   // Заголовки безпеки + Content-Security-Policy: скрипти лише з власного домену, шрифти — з Google Fonts.
@@ -38,14 +40,18 @@ function createApp(db, config) {
   }));
 
   app.use('/api', express.json({ limit: '16kb' }));
-  app.use('/api', createApiRouter(db));
+  app.use('/api', createApiRouter(db, photos));
+
+  // Фото записів: якщо файлу в public/photos немає — запасна ілюстрація замість 404.
+  app.use('/photos', photos.fallbackMiddleware);
 
   // Статичні файли клієнта з кешуванням (HTML — без кешу, щоб оновлення було видно одразу).
   app.use(express.static(config.publicDir, {
     extensions: ['html'],
     maxAge: config.env === 'production' ? '7d' : 0,
     setHeaders(res, filePath) {
-      if (filePath.endsWith('.html')) res.setHeader('Cache-Control', 'no-cache');
+      // HTML і фото з public/photos — без довгого кешу, щоб оновлення й нові фото було видно одразу.
+      if (filePath.endsWith('.html') || /[\\/]photos[\\/]/.test(filePath)) res.setHeader('Cache-Control', 'no-cache');
     },
   }));
 
